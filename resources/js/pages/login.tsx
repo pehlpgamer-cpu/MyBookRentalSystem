@@ -6,28 +6,12 @@ export default function login() {
     inputType: string;
     btnIcon: string;
   }
-
-  const [passwordVisibility, setPasswordVisibility] = useState<passVis>({
-    inputType: 'password',
-    btnIcon: 'openedEye'
-  });
-  
+  //toggle pass vis
+  const [passwordVisibility, setPasswordVisibility] = useState<passVis>({inputType: 'password',btnIcon: 'openedEye'});
   function togglePasswordVisibility ()
   {
-    if (passwordVisibility.inputType == 'text')
-    {
-      setPasswordVisibility({
-        inputType: 'password',
-        btnIcon: 'view'
-      })
-    }
-    else
-    {
-      setPasswordVisibility({
-        inputType: 'text',
-        btnIcon: 'hide'
-      })
-    }
+    if (passwordVisibility.inputType == 'text') setPasswordVisibility({inputType: 'password',btnIcon: 'view'});
+    else setPasswordVisibility({inputType: 'text',btnIcon: 'hide'});
   }
 
 
