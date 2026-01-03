@@ -8,7 +8,7 @@ export default function Welcome() {
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
             <section>
-                
+                <h1>HELLO WORLD</h1>
             </section>
         </>
     );
