@@ -2,6 +2,7 @@
 
 import {useEffect, use, useRef, useState, useActionState} from 'react'
 
+
 export default function login() {
 
   interface passVis{
@@ -91,7 +92,7 @@ export default function login() {
               </span>
               <label className='text-red-600'>{data?.error?.password_error}</label>
               <button type='submit' className='text-xl font-bold rounded-4xl hover:scale-105 hover:rounded-lg duration-150 ease-in-out border mt-6 p-4'>Login</button>
-              <a className='self-center underline mt-2'>create an account?</a>
+              <button className='self-center underline mt-2'><a href='/register'>create an account?</a></button>
             </form>
 
             {/* temporary */}

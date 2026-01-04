@@ -12,6 +12,11 @@ Route::get('login', function () {
     return Inertia::render('login');
 })->name('login');
 
-
-
 Route::post('login', LoginController::class)->name('login.attempt');
+
+
+
+Route::get('/register', function() {
+    return Inertia::render('register');
+})->name('register');
+
