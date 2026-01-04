@@ -5,9 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
+use Inertia\Inertia;
+
 class LoginController extends Controller
 {
-    public function __invoke(Request $request): RedirectResponse
+    public function __invoke(Request $request) //: RedirectResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -17,11 +19,11 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
 
             $request->session()->regenerate();
-            return redirect()->intended('welcome');
+            return Inertia::render('login');
+            //return redirect()->intended('welcome');
         }
 
         return back()->withErrors([
-
             'email' => 'The provided credentials do not match our records.',
 
         ])->onlyInput('email');

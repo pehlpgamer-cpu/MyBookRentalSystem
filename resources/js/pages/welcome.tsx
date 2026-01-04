@@ -7,8 +7,8 @@ export default function Welcome() {
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
-            <section>
-                <h1>HELLO WORLD</h1>
+            <section className='flex justify-center items-center w-screen h-screen'>
+                <h1 className='text-6xl'>console.log('HELLO WORLD');</h1>
             </section>
         </>
     );
