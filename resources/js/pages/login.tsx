@@ -1,7 +1,7 @@
 //  git add .  && git commit -m "" && git push
 
 import {useEffect, use, useRef, useState, useActionState} from 'react'
-
+import axios from 'axios';
 
 
 export default function login() {
@@ -20,6 +20,7 @@ export default function login() {
 
 
   const [data, loginAction, isPending] = useActionState(handleForm, undefined);
+
 
 
   async function handleForm(PreviousState: unknown, formData: FormData)
@@ -57,6 +58,12 @@ export default function login() {
       inputIsValid = false;
     }
 
+    if (inputIsValid)
+    {
+      // send data to Route::post('/login', LoginController::class)->name('login.attempt');
+      submitForm(usernameOrEmail, password);
+    }
+
 
     return {
       fieldData: {
@@ -73,6 +80,18 @@ export default function login() {
 
   }
 
+  async function submitForm(usernameOrEmail: string, password: string) {
+    try {
+      await axios.post('/login', {
+        email: usernameOrEmail,
+        password: password
+      });
+    } 
+    catch (err) {
+      console.error('Error adding todo:', err);
+    }
+  }
+
 
   return (
     <>
@@ -80,7 +99,7 @@ export default function login() {
             <h1 className='text-4xl'>Login</h1>
             <form action={loginAction} className='border p-4 rounded-2xl flex flex-col max-w-4xl'>
               
-              {/* <input type="hidden" name="_method" value="PUT"> */}
+              <input type="hidden" name="_method" value="POST"/> 
               <input type="hidden" name="_token" value="{{ csrf_token() }}"/> {/* CSRF protection */}
 
               <label>Username/Email</label>

@@ -9,15 +9,18 @@ use Inertia\Inertia;
 // })->name('');
 
 
-Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+Route::get('/', function () { return Inertia::render('welcome');})->name('home');
+
 
 Route::get('/login', function () {
     return Inertia::render('login');
 })->name('login');
 
 Route::post('/login', LoginController::class)->name('login.attempt');
+
+//Route::post('logout')
+
+
 
 Route::get('/register', function() {
     return Inertia::render('register');
