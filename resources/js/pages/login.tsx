@@ -22,13 +22,46 @@ export default function login() {
 
   async function handleForm(PreviousState: unknown, formData: FormData)
   {
+    const MaxPasswordLength = 64 as number;
+    const MinPasswordLength = 3 as number;
+
+    let usernameOrEmail_error;
+    let password_error;
+
     const usernameOrEmail = formData.get('usernameOrEmail') as string;
     const password = formData.get('password') as string;
 
-    return {
-      usernameOrEmail: usernameOrEmail,
-      password: password
+    if (usernameOrEmail.trim() == '')
+    {
+      usernameOrEmail_error = 'field is required';
     }
+
+    if (password.trim() == '')
+    {
+      password_error = 'field is required';
+    }
+    else if (password.trim().length < MinPasswordLength) //
+    {
+      password_error = `minimum length is ${MinPasswordLength} characters`;
+    }
+    else if (password.trim().length > MaxPasswordLength)
+    {
+      password_error = `maximum length is ${MaxPasswordLength} characters`;
+    }
+
+
+    return {
+      fieldData: {
+        usernameOrEmail: usernameOrEmail,
+        password: password
+      },
+      error:
+      {
+        usernameOrEmail_error: usernameOrEmail_error,
+        password_error: password_error
+      }
+    }
+
   }
 
 
@@ -39,15 +72,19 @@ export default function login() {
             <form action={action} className='border p-4 rounded-2xl flex flex-col max-w-4xl'>
               <label>Username/Email</label>
               <input name='usernameOrEmail' type='text' className='border p-1.5' />
+              <label className='text-red-600'>{data?.error?.usernameOrEmail_error}</label>
               <label>Password</label>
-              <span>
-                <input name='password' type={passwordVisibility.inputType} className='border p-1.5' />
-                <button type='button' defaultValue={data?.password} className='border border-l-0 p-1.5 h-full' onClick={togglePasswordVisibility}>view</button>
+              <span className='flex'>
+                <input name='password' type={passwordVisibility.inputType} className='grow border p-1.5' />
+                <button type='button' defaultValue={data?.fieldData?.password} className='border border-l-0 p-1.5 h-full hover:bg-gray-100' onClick={togglePasswordVisibility}>view</button>
               </span>
-              <button type='submit' className='text-xl font-bold rounded-4xl hover:rounded-lg duration-150 ease-in-out border mt-6 p-4'>Login</button>
-              <a>create an account?</a>
+              <label className='text-red-600'>{data?.error?.password_error}</label>
+              <button type='submit' className='text-xl font-bold rounded-4xl hover:scale-105 hover:rounded-lg duration-150 ease-in-out border mt-6 p-4'>Login</button>
+              <a className='self-center underline mt-2'>create an account?</a>
             </form>
-            <label>{data?.usernameOrEmail}</label>
+
+            {/* dev */} 
+            <label>{data?.fieldData?.usernameOrEmail}</label>
             {isPending ? <label className='text-yellow-600 text-2xl'>⏳LOADING...</label> : null}
         </section>
     </>
