@@ -22,11 +22,12 @@ export default function login() {
 
   async function handleForm(PreviousState: unknown, formData: FormData)
   {
-    const usernameOrEmail = formData.get('usernameOrEmail');
-    const password = formData.get('password');
+    const usernameOrEmail = formData.get('usernameOrEmail') as string;
+    const password = formData.get('password') as string;
 
     return {
-      usernameOrEmail: usernameOrEmail
+      usernameOrEmail: usernameOrEmail,
+      password: password
     }
   }
 
@@ -38,16 +39,15 @@ export default function login() {
             <form action={action} className='border p-4 rounded-2xl flex flex-col max-w-4xl'>
               <label>Username/Email</label>
               <input name='usernameOrEmail' type='text' className='border p-1.5' />
-              
               <label>Password</label>
               <span>
                 <input name='password' type={passwordVisibility.inputType} className='border p-1.5' />
-                <button className='border p-1.5 h-full' onClick={togglePasswordVisibility}>view</button>
+                <button type='button' defaultValue={data?.password} className='border border-l-0 p-1.5 h-full' onClick={togglePasswordVisibility}>view</button>
               </span>
-              <button type='submit' className='border mt-6 p-4'>Login</button>
+              <button type='submit' className='text-xl font-bold rounded-4xl hover:rounded-lg duration-150 ease-in-out border mt-6 p-4'>Login</button>
               <a>create an account?</a>
             </form>
-            <p>{data.usernameOrEmail}</p>
+            <label>{data?.usernameOrEmail}</label>
             {isPending ? <label className='text-yellow-600 text-2xl'>⏳LOADING...</label> : null}
         </section>
     </>
