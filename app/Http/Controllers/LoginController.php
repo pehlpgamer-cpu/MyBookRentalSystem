@@ -4,31 +4,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-
 use Inertia\Inertia;
 
 class LoginController extends Controller
 {
     public function __invoke(Request $request) //: RedirectResponse
     {
-        dd($request);
+        //echo $request->password;
 
-        // $credentials = $request->validate([
-        //     'email' => ['required', 'email'],
-        //     'password' => ['required'],
-        // ]);
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        // if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
 
-        //     $request->session()->regenerate();
-        //     return Inertia::render('welcome');
-        //     //return redirect()->intended('welcome');
-        // }
+            $request->session()->regenerate();
+            return Inertia::location(route('dashboard'));
+            
+            //return to_route('dashboard');
+        }
 
-        // return back()->withErrors([
-        //     'email' => 'The provided credentials do not match our records.',
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
 
-        // ])->onlyInput('email');
+        ])->onlyInput('email');
 
     }
 }

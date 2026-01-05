@@ -23,10 +23,12 @@ export default function login() {
     password: '',
 })
 
-const handleSubmit = (e: React.FormEvent) => {
+function handleSubmit (e: React.FormEvent) {
     e.preventDefault();
-    console.log(data);
-    post('/login');
+    post('/login', {
+        preserveScroll: false,
+        preserveState: false,
+    });
 }
 
   
@@ -43,23 +45,23 @@ const handleSubmit = (e: React.FormEvent) => {
 
               <label>Username/Email</label>
               <input onChange={(e) => setData('email', e.target.value)} name='usernameOrEmail' type='text' className='border p-1.5' />
-              <label className='text-red-600'>{/**/}</label>
+              <label className='text-red-600'>{errors?.email}</label>
               
               <label>Password</label>
               <span className='flex'>
-                <input name='password' type={passwordVisibility.inputType} className='grow border p-1.5' />
+                <input onChange={(e) => setData('password', e.target.value)} name='password' type={passwordVisibility.inputType} className='grow border p-1.5' />
                 <button type='button' className='border border-l-0 p-1.5 h-full hover:bg-gray-100' onClick={togglePasswordVisibility}>view</button>
               </span>
 
               <label className='text-red-600'>{/**/}</label>
               
-              <button type='submit' className='text-xl font-bold rounded-4xl hover:scale-105 hover:rounded-lg duration-150 ease-in-out border mt-6 p-4'>Login</button>
+              <button disabled={processing} type='submit' className='text-xl font-bold rounded-4xl hover:scale-105 hover:rounded-lg duration-150 ease-in-out border mt-6 p-4'>Login</button>
               
               <button className='self-center underline mt-2'><a href='/register'>create an account?</a></button>
             </form>
 
             {/* temporary */}
-
+            
         </section>
     </>
   )

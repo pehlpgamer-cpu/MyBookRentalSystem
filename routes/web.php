@@ -9,7 +9,7 @@ use Inertia\Inertia;
 // })->name('');
 
 
-Route::get('/', function () { return Inertia::render('welcome');})->name('home');
+Route::get('/', function () { return Inertia::render('welcome');})->name('welcome');
 
 
 Route::get('/login', function () {
