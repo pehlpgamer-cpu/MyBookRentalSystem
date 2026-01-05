@@ -11,22 +11,24 @@ class LoginController extends Controller
 {
     public function __invoke(Request $request) //: RedirectResponse
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        dd($request);
 
-        if (Auth::attempt($credentials)) {
+        // $credentials = $request->validate([
+        //     'email' => ['required', 'email'],
+        //     'password' => ['required'],
+        // ]);
 
-            $request->session()->regenerate();
-            return Inertia::render('login');
-            //return redirect()->intended('welcome');
-        }
+        // if (Auth::attempt($credentials)) {
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+        //     $request->session()->regenerate();
+        //     return Inertia::render('welcome');
+        //     //return redirect()->intended('welcome');
+        // }
 
-        ])->onlyInput('email');
+        // return back()->withErrors([
+        //     'email' => 'The provided credentials do not match our records.',
+
+        // ])->onlyInput('email');
 
     }
 }
