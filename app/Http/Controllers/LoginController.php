@@ -20,9 +20,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
 
             $request->session()->regenerate();
-            return Inertia::location(route('dashboard'));
-            
-            //return to_route('dashboard');
+            return to_route('dashboard');
         }
 
         return back()->withErrors([

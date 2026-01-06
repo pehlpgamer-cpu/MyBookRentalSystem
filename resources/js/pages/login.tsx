@@ -18,17 +18,21 @@ export default function login() {
     else setPasswordVisibility({inputType: 'text',btnIcon: 'hide'});
   }
 
-  const { data, setData, post, processing, errors } = useForm({
+  const { data, setData, post, processing, setError, errors } = useForm({
     email: '',
     password: '',
 })
 
 function handleSubmit (e: React.FormEvent) {
     e.preventDefault();
-    post('/login', {
-        preserveScroll: false,
-        preserveState: false,
-    });
+
+    // this error msg disapears
+    if (data.password.length < 3)
+    {
+      setError('password', 'minimum length is 3 chars');
+    }
+
+    post('/login');
 }
 
   
@@ -52,8 +56,7 @@ function handleSubmit (e: React.FormEvent) {
                 <input onChange={(e) => setData('password', e.target.value)} name='password' type={passwordVisibility.inputType} className='grow border p-1.5' />
                 <button type='button' className='border border-l-0 p-1.5 h-full hover:bg-gray-100' onClick={togglePasswordVisibility}>view</button>
               </span>
-
-              <label className='text-red-600'>{/**/}</label>
+              <label className='text-red-600'>{errors.password}</label>
               
               <button disabled={processing} type='submit' className='text-xl font-bold rounded-4xl hover:scale-105 hover:rounded-lg duration-150 ease-in-out border mt-6 p-4'>Login</button>
               
