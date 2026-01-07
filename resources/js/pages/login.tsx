@@ -4,18 +4,21 @@ import {useEffect, use, useRef, useState, useActionState} from 'react'
 import axios from 'axios';
 import {Head, Link, useForm} from '@inertiajs/react';
 
+//ICONS
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 export default function login() {
 
   interface passVis{
     inputType: string;
-    btnIcon: string;
+    isViewPassword: boolean;
   }
   //toggle pass vis
-  const [passwordVisibility, setPasswordVisibility] = useState<passVis>({inputType: 'password',btnIcon: 'openedEye'});
+  const [passwordVisibility, setPasswordVisibility] = useState<passVis>({inputType: 'password',isViewPassword: true});
   function togglePasswordVisibility ()
   {
-    if (passwordVisibility.inputType == 'text') setPasswordVisibility({inputType: 'password',btnIcon: 'view'});
-    else setPasswordVisibility({inputType: 'text',btnIcon: 'hide'});
+    if (passwordVisibility.inputType == 'text') setPasswordVisibility({inputType: 'password', isViewPassword: true});
+    else setPasswordVisibility({inputType: 'text', isViewPassword: false});
   }
 
   const { data, setData, post, processing, setError, errors } = useForm({
@@ -26,13 +29,29 @@ export default function login() {
 function handleSubmit (e: React.FormEvent) {
     e.preventDefault();
 
-    // this error msg disapears
-    if (data.password.length < 3)
+    let isAllInputValid = true as boolean;
+    
+    //PASSWORD
+    if (data.password.trim() == '')
+    {
+      setError('password', 'field required');
+      isAllInputValid = false;
+    }
+    else if (data.password.length < 3)
     {
       setError('password', 'minimum length is 3 chars');
+      isAllInputValid = false;
     }
 
-    post('/login');
+    //EMAIL
+    if (data.email.trim() == '')
+    {
+      setError('email', 'field required');
+      isAllInputValid = false;
+    }
+    
+
+    if (isAllInputValid) post('/login');
 }
 
   
@@ -47,14 +66,15 @@ function handleSubmit (e: React.FormEvent) {
               <input type="hidden" name="_method" value="POST"/> {/* method spoofing protection */}
               <input type="hidden" name="_token" value="{{ csrf_token() }}"/> {/* CSRF protection */}
 
-              <label>Username/Email</label>
-              <input onChange={(e) => setData('email', e.target.value)} name='usernameOrEmail' type='text' className='border p-1.5' />
+              <label>Email</label>
+              <input onChange={(e) => setData('email', e.target.value)} type='text' className='border p-1.5' />
               <label className='text-red-600'>{errors?.email}</label>
               
               <label>Password</label>
               <span className='flex'>
-                <input onChange={(e) => setData('password', e.target.value)} name='password' type={passwordVisibility.inputType} className='grow border p-1.5' />
-                <button type='button' className='border border-l-0 p-1.5 h-full hover:bg-gray-100' onClick={togglePasswordVisibility}>view</button>
+                <input onChange={(e) => setData('password', e.target.value)} type={passwordVisibility.inputType} className='grow border p-1.5' />
+                <button type='button' className='border border-l-0 p-1.5 h-full hover:bg-gray-100' onClick={togglePasswordVisibility}>
+                  {passwordVisibility.isViewPassword ? <FaEye/> : <FaEyeSlash/>}</button>
               </span>
               <label className='text-red-600'>{errors.password}</label>
               

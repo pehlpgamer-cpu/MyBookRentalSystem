@@ -55,6 +55,11 @@ Route::get('/library', function() {
     return Inertia::render('library');
 })->name('library');
 
+Route::get('/manageLibrary', function() {
+    return Inertia::render('manageLibrary');
+})->name('manageLibrary');
+
+
 Route::get('auditTrail', function() {
     return Inertia::render('auditTrail');
 })->name('auditTrail');

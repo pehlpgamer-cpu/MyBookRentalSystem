@@ -10,7 +10,7 @@ export default function dashboard() {
     <PrimaryLayout Page={
       <>
         <div>dashboard</div>
-        <Link href="/logout" method="post" as="button">Logout</Link>
+        
       </>
     }>
       
