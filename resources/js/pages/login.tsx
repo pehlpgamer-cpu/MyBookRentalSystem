@@ -44,7 +44,7 @@ function handleSubmit (e: React.FormEvent) {
             <h1 className='text-4xl'>Login</h1>
             <form onSubmit={handleSubmit} className='border p-4 rounded-2xl flex flex-col max-w-4xl'>
               
-              <input type="hidden" name="_method" value="POST"/> 
+              <input type="hidden" name="_method" value="POST"/> {/* method spoofing protection */}
               <input type="hidden" name="_token" value="{{ csrf_token() }}"/> {/* CSRF protection */}
 
               <label>Username/Email</label>

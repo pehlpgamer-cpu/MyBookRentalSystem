@@ -4,10 +4,10 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-use Illuminate\Auth\Middleware\Authenticate;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
-use PhpParser\Builder\Function_;
+
 
 // Route::get('/', function() {
 //     return Inertia::render('');
@@ -23,8 +23,17 @@ Route::get('/login', function () {
 
 Route::post('/login', LoginController::class)->name('login.attempt')->middleware('throttle:5,1');
 
-//Route::post('logout')
+Route::post('/logout', function() {
+    Auth::logout();
+    Session::Invalidate();
+    Session::regenerateToken();
+    return redirect('/login');
+})->name('logout');
 
+
+Route::middleware('auth')->group(function() {
+
+});
 
 Route::get('/register', function() {
     return Inertia::render('register');

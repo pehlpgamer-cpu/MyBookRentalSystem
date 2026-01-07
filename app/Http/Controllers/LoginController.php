@@ -8,7 +8,7 @@ use Inertia\Inertia;
 
 class LoginController extends Controller
 {
-    public function __invoke(Request $request) //: RedirectResponse
+    public function __invoke(Request $request) : RedirectResponse
     {
         //echo $request->password;
 
@@ -20,7 +20,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
 
             $request->session()->regenerate();
-            return to_route('dashboard');
+            return redirect()->intended('dashboard');
         }
 
         return back()->withErrors([
