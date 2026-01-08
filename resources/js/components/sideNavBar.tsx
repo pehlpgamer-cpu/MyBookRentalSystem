@@ -18,7 +18,7 @@ export default function () {
             <TbLayoutSidebarLeftCollapseFilled className='text-2xl cursor-pointer'/>
             <label className='cursor-pointer'>collapse</label>
         </button>
-        <section className='flex flex-col gap-1 p-2 bg-amber-300'>
+        <section className='flex flex-col gap-1 p-2'>
             <Link href='/dashboard' className='flex items-center border p-2 rounded-md gap-1 hover:rounded-2xl duration-200 ease-in-out'>
                 <MdDashboard className='text-2xl'/>
                 <label>Dashboard</label>
