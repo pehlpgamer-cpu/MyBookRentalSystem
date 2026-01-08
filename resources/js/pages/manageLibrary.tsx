@@ -1,46 +1,26 @@
 import {useRef, useEffect, useState} from 'react'
-import { useForm, Link, Deferred } from '@inertiajs/react'
-import BookCards from '@/components/bookCards';
+import { Deferred } from '@inertiajs/react'
+import PrimaryLayout from '@/layouts/primaryLayout'
 
-//type Books{}
-
-import PrimaryLayout from '@/layouts/primaryLayout';
-import { type } from 'os';
-
-export default function manageLibrary() {
-    const [isTableView, setIsTableView] = useState<boolean>(false);
-    const [abooks, setBooks] = useState([
-        {
-            id: 1,
-            title: 'atomic habits'
-        },
-        {
-            id: 2,
-            title: 'clean code'
-        }
-    ]);
-
+export default function ManageLibrary({ Books }) // this was the only thing missing on my inertia deferred LMAO
+{
   return (
     <PrimaryLayout Page={
-        <>
-            {/* search */}
-            <header>
-                <label>title</label>
-            </header>
-            {/* display */}
-            <main className='grid grid-cols-6'>
-                <Deferred data="Books" fallback={<div className='font-extrabold'>LOADING...</div>}>
-                    <div>
-                        {Books.map((Books) => <div>{Books.title}</div>)}
-                    </div>
-                </Deferred>
-                {/* {books.map((books) => <BookCards id={books.id} title={books.title} />)} */}
-            </main>
-            {/* pagination */}
-            <footer>
-
-            </footer>
-        </>
-    }/>
+      <>
+        <header>
+          <label>title</label>
+        </header>
+        <main className='grid grid-cols-6'>
+          <Deferred data="Books" fallback={<div className='font-extrabold animate-pulse'>LOADING...</div>}>
+            <div>
+              {Books?.map((book) => (
+                <div key={book.id}>{book.title}</div>
+              ))}
+            </div>
+          </Deferred>
+        </main>
+        <footer></footer>
+      </>
+    } />
   )
 }
