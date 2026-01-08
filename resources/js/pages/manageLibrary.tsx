@@ -19,7 +19,8 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
     <PrimaryLayout Page={
         <>
             <button hidden onClick={reloadBooks} className='border p-2 hover:scale-105 duration-150'>Reload</button>
-            <header>
+            
+            <header className='p-2'>
                 <form onSubmit={handleSearch} className='grid grid-cols-4 gap-2'>
                     <span className='flex flex-col'>
                         <label>Title</label>
@@ -43,8 +44,8 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
 
             <main className=''>
                 <Deferred data="Books" fallback={<div className='font-extrabold animate-pulse'>LOADING...</div>}>
-                <section className='grid grid-cols-6 gap-3 border p-3 mt-3 rounded-lg '>
-                    {Books?.map((book) => (
+                <section className='grid grid-cols-6 gap-3 border-t p-3 mt-3'>
+                    {Books?.map((book: any) => (
                         <BookCards key={book.id} id={book.id} title={book.title} genre={book.genre}/> 
                     ))}
                 </section>

@@ -11,11 +11,21 @@ interface sideNavBarBtnProps{
     icon: any;
 }
 
-export default function sideNavBarButton({btnTitle, link, highlighted, isVisible, isCollapsed, icon} : sideNavBarBtnProps) {
+export default function sideNavBarButton({btnName, link, highlighted, isVisible, isCollapsed, icon} : sideNavBarBtnProps) {
+  
+  if (!isVisible) return null;
+
+  if (highlighted) return (
+    <Link href={link} className='text-white bg-black border font-extrabold flex items-center p-2 rounded-md gap-1 hover:rounded-2xl duration-200 ease-in-out'>
+        {icon}
+        {isCollapsed ? null : <label>{btnName}</label>}
+    </Link>
+  )
+
   return (
-    <Link href='/library' className='flex items-center border p-2 rounded-md gap-1 hover:rounded-2xl duration-200 ease-in-out'>
-        <IoLibrary className='text-2xl'/>
-        <label>(ADMIN) Library</label>
+    <Link href={link} className='flex items-center border p-2 rounded-md gap-1 hover:rounded-2xl duration-200 ease-in-out'>
+        {icon}
+        {isCollapsed ? null : <label>{btnName}</label>}
     </Link>
   )
 }

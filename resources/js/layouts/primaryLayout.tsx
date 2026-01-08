@@ -8,7 +8,7 @@ export default function primaryLayout({Page}) {
             <nav className='border h-screen'>
                 <SideNavBar/>
             </nav>
-            <main className='border border-l-0 p-2 w-screen'>
+            <main className='border border-l-0 w-screen'>
                 {Page}
             </main>
         </div>
