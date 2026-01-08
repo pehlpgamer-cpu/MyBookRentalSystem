@@ -3,12 +3,20 @@ import React from 'react'
 import { useState } from 'react'
 import { Head, useForm , Link} from '@inertiajs/react'
 
+//ICONS
+import { FaCircleXmark, FaCircleCheck } from "react-icons/fa6";
 
 export default function register() {
   const [passwordVisibility, setPasswordVisibility] = useState<string>('password');
   const [confirmPasswordVisibility, setConfirmPasswordVisibility] = useState<string>('password'); 
 
+  const [isValid_MinPassLength, setIsValid_MinPassLength] = useState<boolean>(false);
+  const [isValid_MaxPassLength, setIsValid_MaxPassLength] = useState<boolean>(false);
 
+  function validatePassword()
+  {
+
+  }
 
   return (
     <>
@@ -34,16 +42,10 @@ export default function register() {
           </span>
 
           <section className='mt-1 border rounded-lg p-1.5'>
-            <ul>
-              <li className='list-disc ml-4'>Minimum password characters is 8</li>
-              <li className='list-disc ml-4'>Maximum password characters is 64</li>
-              <li className='list-disc ml-4'>1 special character</li>
-              <li className='list-disc ml-4'></li>
-              <li className='list-disc ml-4'></li>
-              <li className='list-disc ml-4'></li>
-              <li className='list-disc ml-4'></li>
-            </ul>
-            <progress className='border rounded-4xl'/>
+            <span>
+
+              <label>Minimum password characters is 8</label>
+            </span>
           </section>
           
 
@@ -62,7 +64,7 @@ export default function register() {
           <button className='border p-4 mt-6 rounded-4xl 
           hover:font-extrabold hover:rounded-xl hover:scale-y-120 
           duration-600 ease-in-out'>Register</button>
-          <Link type='button' className='mt-2 self-center underline'>Login with an existing account?</Link>          
+          <Link href='/login' className='mt-2 self-center underline hover:font-semibold'>Login with an existing account?</Link>          
         </form>
       </div>
     </>

@@ -1,5 +1,5 @@
 import {useRef, useEffect, useState} from 'react'
-import { useForm, Link } from '@inertiajs/react'
+import { useForm, Link, Deferred } from '@inertiajs/react'
 import BookCards from '@/components/bookCards';
 
 //type Books{}
@@ -9,7 +9,7 @@ import { type } from 'os';
 
 export default function manageLibrary() {
     const [isTableView, setIsTableView] = useState<boolean>(false);
-    const [books, setBooks] = useState([
+    const [abooks, setBooks] = useState([
         {
             id: 1,
             title: 'atomic habits'
@@ -29,7 +29,12 @@ export default function manageLibrary() {
             </header>
             {/* display */}
             <main className='grid grid-cols-6'>
-                {books.map((books) => <BookCards id={books.id} title={books.title} />)}
+                <Deferred data="Books" fallback={<div className='font-extrabold'>LOADING...</div>}>
+                    <div>
+                        {Books.map((Books) => <div>{Books.title}</div>)}
+                    </div>
+                </Deferred>
+                {/* {books.map((books) => <BookCards id={books.id} title={books.title} />)} */}
             </main>
             {/* pagination */}
             <footer>

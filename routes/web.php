@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoginController;
+use App\Models\Books;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
@@ -30,45 +31,49 @@ Route::post('/logout', function() {
     return redirect('/login');
 })->name('logout');
 
+Route::get('/register', function() {return Inertia::render('register');})
+->name('register');
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function() 
+{
+    Route::get('/dashboard', function() {return Inertia::render('dashboard');})
+    ->name('dashboard');
 
+    Route::get('/accountSettings', function() {return Inertia::render('accountSettings');})
+    ->name('accountSettings');
+
+    Route::get('/manageLibrary', function() {
+        return Inertia::render('manageLibrary', [
+            'Books' => Inertia::defer(fn () => Books::all()),
+    ]);
+})->name('manageLibrary');
+
+
+    Route::get('auditTrail', function() {return Inertia::render('auditTrail');})
+    ->name('auditTrail');
 });
 
-Route::get('/register', function() {
-    return Inertia::render('register');
-})->name('register');
+
+
 
 Route::controller(BookController::class)->group(function (){
     Route::get('/books', 'index')->name('books.index');
 });
 
-Route::get('/dashboard', function() {
-    return Inertia::render('dashboard');
-})->name('dashboard')->middleware('auth');
-
-Route::get('/accountSettings', function() {
-    return Inertia::render('accountSettings');
-})->name('accountSettings');
-
-Route::get('/library', function() {
-    return Inertia::render('library');
-})->name('library');
-
-Route::get('/manageLibrary', function() {
-    return Inertia::render('manageLibrary');
-})->name('manageLibrary');
 
 
-Route::get('auditTrail', function() {
-    return Inertia::render('auditTrail');
-})->name('auditTrail');
 
-Route::get('/notifications', function() {
-    return Inertia::render('notifications');
-})->name('notifications');
 
-Route::get('/help', function() {
-    return Inertia::render('help');
-})->name('help');
+
+Route::get('/library', function() {return Inertia::render('library');})
+->name('library');
+
+
+
+
+Route::get('/notifications', function() {return Inertia::render('notifications');})
+->name('notifications');
+
+Route::get('/help', function() {return Inertia::render('help');})
+->name('help');
 
