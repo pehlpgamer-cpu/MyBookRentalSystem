@@ -9,11 +9,15 @@ interface bookCardProps{
 
 export default function bookCards({id, title, genre, author} : bookCardProps) {
   return (
-    <div className='p-3 border rounded-lg flex flex-col justify-center'>
+    <div className='border rounded-r-xl flex justify-center hover:scale-105 duration-150'>
+      <img className='w-55 border-r-1 bg-gray-100' alt='img.png'>
+      </img>
+      <section className='flex flex-col p-3'>
         <h1 className='font-bold text-lg'>{title}</h1>
-        <label><b>ID:</b> {id}</label>
-        <label><b>Genre:</b> {genre}</label>
+        <label>ID: {id}</label>
+        <label>Genre: {genre}</label>
         {/* {<label><b>Author:</b> {author}</label>} */}
+      </section>
     </div>
   )
 }

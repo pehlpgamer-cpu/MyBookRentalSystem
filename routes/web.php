@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function()
     Route::get('/manageLibrary', function() {
         //sleep(2); // loading demo
         return Inertia::render('manageLibrary', [
-            'Books' => Inertia::defer(fn () => Books::all('id', 'title')),
+            'Books' => Inertia::defer(fn () => Books::all('id', 'title', 'genre')),
     ]);
 })->name('manageLibrary');
 
