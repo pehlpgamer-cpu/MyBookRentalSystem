@@ -43,9 +43,11 @@ Route::middleware('auth')->group(function()
     ->name('accountSettings');
 
     Route::get('/manageLibrary', function() {
+        sleep(2); // loading demo
         return Inertia::render('manageLibrary', [
             'Books' => Inertia::defer(fn () => Books::all()),
     ]);
+    
 })->name('manageLibrary');
 
 

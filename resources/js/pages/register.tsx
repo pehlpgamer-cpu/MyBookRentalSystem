@@ -10,11 +10,34 @@ export default function register() {
   const [passwordVisibility, setPasswordVisibility] = useState<string>('password');
   const [confirmPasswordVisibility, setConfirmPasswordVisibility] = useState<string>('password'); 
 
-  const [isValid_MinPassLength, setIsValid_MinPassLength] = useState<boolean>(false);
-  const [isValid_MaxPassLength, setIsValid_MaxPassLength] = useState<boolean>(false);
+  const [passwordErrors, setPasswordErrors] = useState(null);
+  
+  const [ data, setData, post, processing, setError, errors] = useForm({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    agreedWithTermsAndConditions: false,
+  });
+
+  // TODO input validation: low priority
 
   function validatePassword()
   {
+    let isAllInputValid = true as boolean;
+
+    let validMaxPassLen = false as boolean;
+    let validMaxPassLen = false as boolean;
+    
+    
+  }
+
+
+
+  function handleSubmit(e: React.FormEvent)
+  {
+    e.preventDefault();
+    let isAllInputValid = true as boolean;
 
   }
 
@@ -27,11 +50,11 @@ export default function register() {
         <h1>Register</h1>
         <form className='p-4 border rounded-xl flex flex-col justify-center'>
           <label className=''>Username</label>
-          <input type='' className='inputTxtbox'/>
+          <input type='text' className='inputTxtbox'/>
           <label className='text-red-500'>{}</label>
 
           <label className=''>Email</label>
-          <input type='' className='inputTxtbox'/>
+          <input type='text' className='inputTxtbox'/>
           <label className='text-red-500'>{}</label>
 
           <label className=''>Password</label>
@@ -43,8 +66,8 @@ export default function register() {
 
           <section className='mt-1 border rounded-lg p-1.5'>
             <span>
-
-              <label>Minimum password characters is 8</label>
+              <label className='text-green-500'>Minimum password characters is 8</label>
+              <label className='text-green-500'>Maximum password characters is 8</label>
             </span>
           </section>
           

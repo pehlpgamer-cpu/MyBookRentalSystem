@@ -1,9 +1,16 @@
 import {useRef, useEffect, useState} from 'react'
-import { Deferred } from '@inertiajs/react'
+import { Deferred, router } from '@inertiajs/react'
 import PrimaryLayout from '@/layouts/primaryLayout'
+
+
 
 export default function ManageLibrary({ Books }) // this was the only thing missing on my inertia deferred LMAO
 {
+    function reloadBooks()
+    {
+        router.reload({ only: ['Books'] })
+    }
+
   return (
     <PrimaryLayout Page={
       <>
@@ -18,6 +25,7 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
               ))}
             </div>
           </Deferred>
+          <button onClick={reloadBooks} className='border p-2 hover:scale-105 duration-150'>Reload</button>
         </main>
         <footer></footer>
       </>
