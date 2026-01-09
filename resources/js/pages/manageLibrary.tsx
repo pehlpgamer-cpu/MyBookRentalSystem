@@ -26,7 +26,7 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
     
     Page={
         <div className='flex flex-col'>
-            <AddEditBookModal modalOpened={openAddEditModal}/>
+            <AddEditBookModal modalOpened={openAddEditModal} exitBtn={() => {setOpenAddEditModal(false)}}/>
             <button onClick={reloadBooks} className='border p-2 hover:bg-black hover:text-white duration-150'>Reload</button>
             
             <header className='p-2'>
@@ -62,7 +62,7 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
 
             <main className='h-full'>
                 <Deferred data="Books" fallback={<div className='font-extrabold animate-pulse'>LOADING...</div>}>
-                <section className='grid grid-cols-6 grid-rows-4 gap-3 border-t p-3 mt-3'>
+                <section className='grid grid-cols-4 grid-rows-4 gap-3 border-t p-3 mt-3'>
                     {Books?.map((book: any) => (
                         <BookCards key={book.id} id={book.id} title={book.title} genre={book.genre}/> 
                     ))}
