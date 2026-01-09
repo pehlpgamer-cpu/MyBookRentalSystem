@@ -9,7 +9,7 @@ export default function dashboard() {
 
   return (
     <PrimaryLayout 
-    SideNavBar={<SideNavBar highlightBtn='manageLibrary'/>}
+    SideNavBar={<SideNavBar highlightBtn='dashboard'/>}
 
     Page={
       <>

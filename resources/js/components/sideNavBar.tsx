@@ -22,7 +22,7 @@ import SideNavBarButton from './sideNavBarButton';
 
 
 interface SideNavBarProps {
-    highlight_dashboard: boolean;
+    highlightBtn: string;
 }
 
 export default function SideNavBar({ highlightBtn }: SideNavBarProps) {
@@ -48,7 +48,7 @@ export default function SideNavBar({ highlightBtn }: SideNavBarProps) {
             <SideNavBarButton btnName='Dashboard'
             icon={<LayoutDashboard className='text-2xl'/>}
             isVisible={true}
-            highlighted={dashboard_isHighlighted}
+            highlighted={dashboard_isHighlighted.current}
             isCollapsed={false}
             link='/dashboard'
             
@@ -57,7 +57,7 @@ export default function SideNavBar({ highlightBtn }: SideNavBarProps) {
             <SideNavBarButton btnName='Library'
             icon={<Library className='text-2xl'/>}
             isVisible={true}
-            highlighted={manageLibrary_isHighlighted}
+            highlighted={manageLibrary_isHighlighted.current}
             isCollapsed={false}
             link='/manageLibrary'
             />
@@ -65,7 +65,7 @@ export default function SideNavBar({ highlightBtn }: SideNavBarProps) {
             <SideNavBarButton btnName='Account'
             icon={<CircleUserRound className='text-2xl'/>}
             isVisible={true}
-            highlighted={account_isHighlighted}
+            highlighted={account_isHighlighted.current}
             isCollapsed={false}
             link='/accountSettings'
             />
