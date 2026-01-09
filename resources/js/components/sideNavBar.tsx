@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 
-import { TbLayoutSidebarLeftCollapseFilled } from "react-icons/tb";
+
 
 
 
@@ -21,20 +21,21 @@ import { TbLayoutSidebarLeftCollapseFilled } from "react-icons/tb";
 import SideNavBarButton from './sideNavBarButton';
 
 
-export default function () {
+interface SideNavBarProps {
+    highlightBtn: string;
+}
 
-    const [dashboard_BtnHighlighted, setDashboard_BtnHighlighted] = useState<boolean>(false);
-    const [manageLibrary_BtnHighlighted, setManageLibrary_BtnHighlighted] = useState<boolean>(false);
-    const [account_BtnHighlighted, setAccount_BtnHighlighted] = useState<boolean>(false);
+export default function SideNavBar({ highlightBtn }: SideNavBarProps) {
+
+    const [dashboard_isHighlighted, setDashboard_isHighlighted] = useState<boolean>(false);
+    const [manageLibrary_isHighlighted, setManageLibrary_isHighlighted] = useState<boolean>(false);
+    const [account_isHighlighted, setAccount_isHighlighted] = useState<boolean>(false);
     
     
-
-    function disableAllHighlightedBtn()
-    {
-        setDashboard_BtnHighlighted(false);
-        setManageLibrary_BtnHighlighted(false);
-        setAccount_BtnHighlighted(false);
-    }
+    if (highlightBtn == 'dashboard') setDashboard_isHighlighted(true);
+    else if (highlightBtn == 'manageLibrary') setManageLibrary_isHighlighted(true);
+    else if (highlightBtn == 'account') setAccount_isHighlighted(true);
+    else alert('invalid nav button highlight');
 
     return (
     <div className='flex flex-col gap-1'>
@@ -47,28 +48,26 @@ export default function () {
             <SideNavBarButton btnName='Dashboard'
             icon={<LayoutDashboard className='text-2xl'/>}
             isVisible={true}
-            highlighted={dashboard_BtnHighlighted}
+            highlighted={dashboard_isHighlighted}
             isCollapsed={false}
             link='/dashboard'
-            onClick={() => {setDashboard_BtnHighlighted(true)}}
+            
             />
 
             <SideNavBarButton btnName='Library'
             icon={<Library className='text-2xl'/>}
             isVisible={true}
-            highlighted={manageLibrary_BtnHighlighted}
+            highlighted={manageLibrary_isHighlighted}
             isCollapsed={false}
             link='/manageLibrary'
-            onClick={() => {setManageLibrary_BtnHighlighted(true)}}
             />
 
             <SideNavBarButton btnName='Account'
             icon={<CircleUserRound className='text-2xl'/>}
             isVisible={true}
-            highlighted={account_BtnHighlighted}
+            highlighted={account_isHighlighted}
             isCollapsed={false}
             link='/accountSettings'
-            onClick={null}
             />
 
             <div className=''/>

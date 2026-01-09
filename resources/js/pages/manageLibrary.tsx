@@ -1,7 +1,8 @@
-import {useRef, useEffect, useState} from 'react'
-import { usePage, Deferred, router, useForm } from '@inertiajs/react'
+
+import { Deferred, router, useForm } from '@inertiajs/react'
 import PrimaryLayout from '@/layouts/primaryLayout'
 import BookCards from '@/components/bookCards'
+import SideNavBar from '@/components/sideNavBar'
 
 
 export default function ManageLibrary({ Books }) // this was the only thing missing on my inertia deferred LMAO
@@ -16,7 +17,10 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
     }
 
     return (
-    <PrimaryLayout Page={
+    <PrimaryLayout 
+    SideNavBar={<SideNavBar highlightBtn='manageLibrary'/>}
+    
+    Page={
         <>
             <button onClick={reloadBooks} className='border p-2 hover:scale-105 duration-150'>Reload</button>
             

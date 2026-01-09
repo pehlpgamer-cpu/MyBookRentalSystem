@@ -1,12 +1,12 @@
 import React from 'react'
 
-import SideNavBar from '../components/sideNavBar';
 
-export default function primaryLayout({Page}) {
+
+export default function primaryLayout({SideNavBar, Page}) {
     return (
         <div className='w-screen flex'>
             <nav className='border h-screen'>
-                <SideNavBar/>
+                {SideNavBar}
             </nav>
             <main className='border border-l-0 w-screen'>
                 {Page}
