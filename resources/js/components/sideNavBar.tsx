@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useRef, useState} from 'react'
 import '../../css/sideNavBar.css'
 import { Link, router } from '@inertiajs/react';
 
@@ -22,19 +22,19 @@ import SideNavBarButton from './sideNavBarButton';
 
 
 interface SideNavBarProps {
-    highlightBtn: string;
+    highlight_dashboard: boolean;
 }
 
 export default function SideNavBar({ highlightBtn }: SideNavBarProps) {
 
-    const [dashboard_isHighlighted, setDashboard_isHighlighted] = useState<boolean>(false);
-    const [manageLibrary_isHighlighted, setManageLibrary_isHighlighted] = useState<boolean>(false);
-    const [account_isHighlighted, setAccount_isHighlighted] = useState<boolean>(false);
+    const dashboard_isHighlighted = useRef<boolean>(false);
+    const manageLibrary_isHighlighted = useRef<boolean>(false);
+    const account_isHighlighted = useRef<boolean>(false);
     
     
-    if (highlightBtn == 'dashboard') setDashboard_isHighlighted(true);
-    else if (highlightBtn == 'manageLibrary') setManageLibrary_isHighlighted(true);
-    else if (highlightBtn == 'account') setAccount_isHighlighted(true);
+    if (highlightBtn == 'dashboard') dashboard_isHighlighted.current = true;
+    else if (highlightBtn == 'manageLibrary') manageLibrary_isHighlighted.current = true;
+    else if (highlightBtn == 'account') account_isHighlighted.current = true;
     else alert('invalid nav button highlight');
 
     return (
