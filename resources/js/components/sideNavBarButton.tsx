@@ -9,21 +9,22 @@ interface sideNavBarBtnProps{
     highlighted: boolean;
     isCollapsed: boolean;
     icon: any;
+    onClick: any;
 }
 
-export default function sideNavBarButton({btnName, link, highlighted, isVisible, isCollapsed, icon} : sideNavBarBtnProps) {
+export default function sideNavBarButton({btnName, link, highlighted, isVisible, isCollapsed, icon, onClick} : sideNavBarBtnProps) {
   
   if (!isVisible) return null;
 
   if (highlighted) return (
-    <Link href={link} className='text-white bg-black border font-extrabold flex items-center p-2 rounded-md gap-1 hover:rounded-2xl duration-200 ease-in-out'>
+    <Link href={link} className='hover:scale-105 text-white bg-black border font-extrabold flex items-center p-2 rounded-md gap-1 hover:rounded-2xl duration-100 ease-in-out'>
         {icon}
         {isCollapsed ? null : <label>{btnName}</label>}
     </Link>
   )
 
   return (
-    <Link href={link} className='flex items-center border p-2 rounded-md gap-1 hover:rounded-2xl duration-200 ease-in-out'>
+    <Link onClick={onClick} href={link} className='hover:scale-105 flex items-center border p-2 rounded-md gap-1 hover:rounded-2xl duration-100 ease-in-out'>
         {icon}
         {isCollapsed ? null : <label>{btnName}</label>}
     </Link>

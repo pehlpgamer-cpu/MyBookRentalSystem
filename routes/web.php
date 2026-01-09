@@ -36,21 +36,27 @@ Route::get('/register', function() {return Inertia::render('register');})
 
 Route::middleware('auth')->group(function() 
 {
-    Route::get('/dashboard', function() {return Inertia::render('dashboard');})
+    Route::get('/dashboard', function() {
+        return Inertia::render('dashboard');})
     ->name('dashboard');
 
-    Route::get('/accountSettings', function() {return Inertia::render('accountSettings');})
+    Route::get('/accountSettings', function() {
+        return Inertia::render('accountSettings');})
     ->name('accountSettings');
 
     Route::get('/manageLibrary', function() {
         //sleep(2); // loading demo
-        return Inertia::render('manageLibrary', [
+        $response = Inertia::render('manageLibrary', [
             'Books' => Inertia::defer(fn () => Books::all('id', 'title', 'genre')),
     ]);
+
+    //dd($response);
+    return $response;
 })->name('manageLibrary');
 
 
-    Route::get('auditTrail', function() {return Inertia::render('auditTrail');})
+    Route::get('auditTrail', function() {
+        return Inertia::render('auditTrail');})
     ->name('auditTrail');
 });
 
@@ -66,15 +72,18 @@ Route::controller(BookController::class)->group(function (){
 
 
 
-Route::get('/library', function() {return Inertia::render('library');})
+Route::get('/library', function() {
+    return Inertia::render('library');})
 ->name('library');
 
 
 
 
-Route::get('/notifications', function() {return Inertia::render('notifications');})
+Route::get('/notifications', function() {
+    return Inertia::render('notifications');})
 ->name('notifications');
 
-Route::get('/help', function() {return Inertia::render('help');})
+Route::get('/help', function() {
+    return Inertia::render('help');})
 ->name('help');
 

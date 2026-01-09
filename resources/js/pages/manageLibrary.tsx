@@ -1,5 +1,5 @@
 import {useRef, useEffect, useState} from 'react'
-import { Deferred, router, useForm } from '@inertiajs/react'
+import { usePage, Deferred, router, useForm } from '@inertiajs/react'
 import PrimaryLayout from '@/layouts/primaryLayout'
 import BookCards from '@/components/bookCards'
 
@@ -8,7 +8,7 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
 {
     function reloadBooks() {router.reload({ only: ['Books'] })}
     
-    const [data] = useForm();
+    const [data, setData, error] = useForm();
 
     function handleSearch(e: React.FormEvent)
     {
@@ -18,7 +18,7 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
     return (
     <PrimaryLayout Page={
         <>
-            <button hidden onClick={reloadBooks} className='border p-2 hover:scale-105 duration-150'>Reload</button>
+            <button onClick={reloadBooks} className='border p-2 hover:scale-105 duration-150'>Reload</button>
             
             <header className='p-2'>
                 <form onSubmit={handleSearch} className='grid grid-cols-4 gap-2'>
