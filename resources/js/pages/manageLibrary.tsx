@@ -1,6 +1,10 @@
-import { useState } from 'react'
-import { Deferred, router, useForm } from '@inertiajs/react'
+import { useState, useEffect } from 'react'
+import { router, useForm } from '@inertiajs/react'
 import PrimaryLayout from '@/layouts/primaryLayout'
+
+// ICONS
+import { ArrowLeft, ArrowRight } from 'lucide-react' 
+
 
 // COMPONENTS
 import BookCards from '@/components/bookCards'
@@ -25,7 +29,7 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
     SideNavBar={<SideNavBar highlightBtn='manageLibrary'/>}
     
     Page={
-        <div className='flex flex-col'>
+        <div className='flex flex-col h-full'>
             <AddEditBookModal modalOpened={openAddEditModal} exitBtn={() => {setOpenAddEditModal(false)}}/>
             <button onClick={reloadBooks} className='border p-2 hover:bg-black hover:text-white duration-150'>Reload</button>
             
@@ -61,16 +65,32 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
             </header>
 
             <main className='h-full'>
-                <Deferred data="Books" fallback={<div className='font-extrabold animate-pulse'>LOADING...</div>}>
                 <section className='grid grid-cols-4 grid-rows-4 gap-3 border-t p-3 mt-3'>
                     {Books?.map((book: any) => (
                         <BookCards key={book.id} id={book.id} title={book.title} genre={book.genre}/> 
                     ))}
                 </section>
-                </Deferred>
+                
             </main>
-            <footer className='border-t'>
-                <button>pagination</button>
+            <div className=''/>
+            <footer className='border-t p-3 flex gap-2'>
+                <button className='p-1.5 border rounded-lg flex
+                    hover:text-white hover:border-black hover:bg-black hover:rounded-2xl duration-100 ease-in-out'>
+                        <ArrowLeft/>
+                        <label>Prev</label>
+                </button>
+                <button className='p-1.5 border rounded-lg flex
+                    hover:text-white hover:border-black hover:bg-black hover:rounded-2xl duration-100 ease-in-out'>
+                        <label>Next</label>
+                        <ArrowRight/>
+                </button>
+                <span>
+                    <input className='w-24 p-1.5 border rounded-l-lg border-r-0' type='number'/>
+                    <button 
+                    className='p-1.5 border rounded-r-lg hover:border-black hover:text-white hover:bg-black hover:rounded-r-2xl duration-100 ease-in-out'>View page</button>
+
+                </span>
+                <label className='p-1.5'>1/99</label>
             </footer>
         </div>
     } />

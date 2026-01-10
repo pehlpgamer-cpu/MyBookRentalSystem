@@ -34,6 +34,7 @@ Route::post('/logout', function() {
 Route::get('/register', function() {return Inertia::render('register');})
 ->name('register');
 
+// Auth
 Route::middleware('auth')->group(function() 
 {
     Route::get('/dashboard', function() {
@@ -46,18 +47,16 @@ Route::middleware('auth')->group(function()
 
     Route::get('/manageLibrary', function() {
         //sleep(2); // loading demo
-        $response = Inertia::render('manageLibrary', [
-            'Books' => Inertia::defer(fn () => Books::all('id', 'title', 'genre')),
-    ]);
-
-    //dd($response);
-    return $response;
-})->name('manageLibrary');
+        $response = Inertia::render('manageLibrary');
+        //dd($response);
+        return $response;
+    })->name('manageLibrary');
 
 
     Route::get('auditTrail', function() {
         return Inertia::render('auditTrail');})
     ->name('auditTrail');
+
 });
 
 

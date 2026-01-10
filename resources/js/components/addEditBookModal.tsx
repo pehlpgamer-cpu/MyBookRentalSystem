@@ -1,4 +1,6 @@
 import React from 'react'
+import {X} from 'lucide-react'
+import { useForm } from '@inertiajs/react';
 
 interface addEditBookModalProps {
     modalOpened: boolean;
@@ -6,20 +8,30 @@ interface addEditBookModalProps {
 }
 
 export default function addEditBookModal({modalOpened, exitBtn} : addEditBookModalProps) {
-    if (!modalOpened) return null;
     
+    const { data, setData, post, processing, errors } = useForm({
+        title: '',
+        genre: '',
+    });
+    
+    function handleSubmit(e: React.FormEvent)
+    {
+        e.preventDefault();
+    }
+    if (!modalOpened) return null;
+
     return (
         <div className='bg-black/50 w-screen h-screen flex justify-center items-center absolute'>
-            <section className='bg-white border p-3 rounded-2xl'>
-                <button onClick={exitBtn} className='p-2'>EXIT</button>
-                <form className='flex flex-col justify-center gap-1.5'>
+            <section className='bg-white border flex flex-col rounded-2xl'>
+                <button onClick={exitBtn} className='p-2 self-end hover:text-red-600 hover:scale-105'><X/></button>
+                <form onSubmit={handleSubmit} className='flex flex-col mr-3 ml-3 mb-3 justify-center gap-1.5'>
                     <label>Title</label>
                     <input type='text' className='border rounded-md p-1.5'/>
                     <label>Genre</label>
                     <input type='text' className='border rounded-md p-1.5'/>
                     <label>Author</label>
                     <input type='text' className='border rounded-md p-1.5'/>
-                    <button type='submit' className='p-2 rounded-lg border'>Submit</button>
+                    <button type='submit' className='mt-4 p-2 rounded-lg border'>Submit</button>
                 </form>
             </section>
         </div>
