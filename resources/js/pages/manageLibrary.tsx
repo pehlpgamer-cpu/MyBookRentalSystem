@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios';
 import { router, useForm } from '@inertiajs/react'
 import PrimaryLayout from '@/layouts/primaryLayout'
 
@@ -9,11 +10,18 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 // COMPONENTS
 import BookCards from '@/components/bookCards'
 import SideNavBar from '@/components/sideNavBar'
-import AddEditBookModal from '@/components/addEditBookModal'
+import AddEditBookModal from '@/components/addBookModal'
 
-export default function ManageLibrary({ Books }) 
+export default function ManageLibrary() 
 {
-    
+    const [books, setBooks] = useState();
+
+    useEffect(() => {
+    axios.get('http://localhost:8000/book/index')
+        .then(response => setBooks(response.data))
+        .catch(error => console.error(error));
+    }, []);
+
     const [openAddEditModal, setOpenAddEditModal] = useState<boolean>(false);
     
     //const [data, setData, error] = useForm();
@@ -65,7 +73,7 @@ export default function ManageLibrary({ Books })
 
             <main className='h-full'>
                 <section className='grid grid-cols-4 grid-rows-4 gap-3 border-t p-3 mt-3'>
-                    {Books?.map((book: any) => (
+                    {books?.map((book: any) => (
                         <BookCards key={book.id} id={book.id} title={book.title} genre={book.genre}/> 
                     ))}
                 </section>

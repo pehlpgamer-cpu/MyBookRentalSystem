@@ -51,8 +51,9 @@ Route::middleware('auth')->group(function()
 
     Route::controller(BookController::class)->group(function () {
         Route::get('/book/index', 'index');
+        Route::get('book/show/{id}', 'show');
+        Route::post('/book/store', 'store');
         Route::delete('/book/delete/{id}', 'destroy');
-        Route::post('/book/create', 'create');
     });
 
 

@@ -29,7 +29,13 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'genre' => 'required|string',
+        ]);
+
+            $post = Books::create($validated);
+            return response()->json($post, 201);
     }
 
     /**
@@ -37,7 +43,8 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $response = Books::find($id);
+        return $response;
     }
 
     /**
@@ -45,7 +52,7 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -53,7 +60,9 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Books::findOrFail($id);
+        $post->update($request->all());
+        return response()->json($post);
     }
 
     /**
@@ -61,6 +70,7 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        dd($id);
+        Books::destroy($id);
+        return response()->json(['message' => 'Post deleted']);
     }
 }
