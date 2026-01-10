@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Books;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -11,7 +12,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        
+        $response = Books::all();
+        return $response;
     }
 
     /**
@@ -59,6 +61,6 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        dd($id);
     }
 }

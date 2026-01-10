@@ -46,11 +46,14 @@ Route::middleware('auth')->group(function()
     ->name('accountSettings');
 
     Route::get('/manageLibrary', function() {
-        //sleep(2); // loading demo
-        $response = Inertia::render('manageLibrary');
-        //dd($response);
-        return $response;
+        return Inertia::render('manageLibrary');
     })->name('manageLibrary');
+
+    Route::controller(BookController::class)->group(function () {
+        Route::get('/book/index', 'index');
+        Route::delete('/book/delete/{id}', 'destroy');
+        Route::post('/book/create', 'create');
+    });
 
 
     Route::get('auditTrail', function() {

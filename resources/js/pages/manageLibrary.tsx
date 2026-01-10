@@ -11,10 +11,9 @@ import BookCards from '@/components/bookCards'
 import SideNavBar from '@/components/sideNavBar'
 import AddEditBookModal from '@/components/addEditBookModal'
 
-export default function ManageLibrary({ Books }) // this was the only thing missing on my inertia deferred LMAO
+export default function ManageLibrary({ Books }) 
 {
-    function reloadBooks() {router.reload({ only: ['Books'] })}
-
+    
     const [openAddEditModal, setOpenAddEditModal] = useState<boolean>(false);
     
     //const [data, setData, error] = useForm();
@@ -31,7 +30,7 @@ export default function ManageLibrary({ Books }) // this was the only thing miss
     Page={
         <div className='flex flex-col h-full'>
             <AddEditBookModal modalOpened={openAddEditModal} exitBtn={() => {setOpenAddEditModal(false)}}/>
-            <button onClick={reloadBooks} className='border p-2 hover:bg-black hover:text-white duration-150'>Reload</button>
+            
             
             <header className='p-2'>
                 <form onSubmit={handleSearch} className='grid grid-cols-5 gap-2'>
